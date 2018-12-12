@@ -1,0 +1,17 @@
+.text-buttons-container {
+  display: grid;
+  grid-template-columns: max-content min-content;
+  width: 36vw;
+  height: 7vh;
+  justify-content: space-between;
+  align-content: center;
+}
+.edit-delete-archive-buttons {
+  display: grid;
+  grid-template-columns: min-content min-content min-content;
+  grid-gap: 1vw;
+}
+.svg-icons {
+  width: 2vw !important;
+  color: #14b850;
+}

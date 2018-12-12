@@ -1,0 +1,32 @@
+<div id="textbox-container">
+  <input
+    class="textbox"
+    type="text"
+    value=""
+    placeholder="Enter Anything"
+    #txt
+  />
+  <ng-container *ngIf="addButton; else: updateButton">
+    <input
+      class="add-button"
+      type="button"
+      value="+"
+      (click)="add(txt.value)"
+    />
+  </ng-container>
+  <ng-template #updateButton>
+    <input
+      class="add-button update-button"
+      type="button"
+      value="Update"
+      (click)="update(txt.value)"
+    />
+  </ng-template>
+</div>
+<div></div>
+<app-todo-list
+  [myinput]="inputvariable"
+  [editInput]="afterEditText"
+  (editText)="onEditText($event)"
+  (enableAddButton)="afterUpdateClick($event)"
+></app-todo-list>

@@ -1,0 +1,27 @@
+#textbox-container {
+  display: grid;
+  grid-template-columns: 30vw 5vw;
+  grid-template-rows: 7vh;
+  grid-gap: 1vw;
+}
+.textbox {
+  text-indent: 1vw;
+  border-radius: 5px;
+  border: 1px solid #14b850;
+  width: auto;
+  height: auto;
+}
+.add-button {
+  border-radius: 5px;
+  border: 1px solid #14b850;
+  height: auto;
+  width: auto;
+  padding: 0;
+  background-color: #14b850;
+  color: white;
+  font-size: 2.5em;
+  font-weight: 900;
+}
+.update-button {
+  font-size: 1em;
+}
