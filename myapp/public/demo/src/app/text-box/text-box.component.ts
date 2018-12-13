@@ -32,12 +32,9 @@ export class TextBoxComponent implements OnInit {
       todo: txt,
       isCompleted: false
     };
-    this.todoServices.postTodos(todoItem).subscribe(
-      () => {
-        debugger;
-      },
-      err => alert('Failed to add')
-    );
+    this.todoServices
+      .postTodos(todoItem)
+      .subscribe(() => {}, err => alert('Failed to add'));
   }
 
   onEditText(editText: string) {
@@ -48,8 +45,17 @@ export class TextBoxComponent implements OnInit {
   }
 
   update(text: string) {
-    console.log(text);
+    // console.log(text);
     this.afterEditText = text;
+    // const editedText = {
+    //   todo: text
+    // };
+    // this.todoServices.afterUpdateClick(editedText).subscribe(
+    //   () => {
+    //     debugger;
+    //   },
+    //   err => alert('Failed to update')
+    // );
   }
 
   afterUpdateClick() {

@@ -41,8 +41,9 @@ export class TodoListComponent implements OnInit, OnChanges {
   constructor(private todoService: TobedoneService) {}
 
   ngOnInit() {
-    // this.todosFromServices();
+    this.todosFromServices();
     this.todoService.todosUpdated.subscribe((data: TodoItem[]) => {
+      console.log(data);
       this.todos = data;
     });
   }
@@ -116,11 +117,15 @@ export class TodoListComponent implements OnInit, OnChanges {
       const editedText = {
         todo: text
       };
-      this.todoService
-        .afterUpdateClick(editedText, this.editId)
-        .subscribe((data: ArrayType) => {
-          this.onGetEditData(data);
-        });
+      this.todoService.afterUpdateClick(editedText, this.editId).subscribe(
+        () => {
+          this.enableAddButton.emit();
+        },
+        err => alert('Failed to update')
+      );
+      // .subscribe((data: ArrayType) => {
+      //   this.onGetEditData(data);
+      // });
     }
   }
 
@@ -138,11 +143,14 @@ export class TodoListComponent implements OnInit, OnChanges {
     if (id) {
       // console.log(id);
       // const idNum = Number(id: numbe);
-      this.todoService.deleteTodos(id).subscribe((data: number) => {
-        // console.log(data);
-        this.onGetDeleteData(data);
-        // this.success = data;
-      });
+      this.todoService
+        .deleteTodos(id)
+        .subscribe(() => {}, err => alert('Failed to Delete'));
+      // .subscribe((data: number) => {
+      //   // console.log(data);
+      //   this.onGetDeleteData(data);
+      //   // this.success = data;
+      // });
       // this.indexs = this.todos.indexOf(text);
       // this.todos.splice(this.indexs, 1);
     }
@@ -160,10 +168,13 @@ export class TodoListComponent implements OnInit, OnChanges {
   }
 
   onArchieveText(id: number) {
-    this.todoService.archiveTodos(id).subscribe((data: number) => {
-      // console.log(data);
-      this.onGetArchiveData(data);
-    });
+    this.todoService
+      .archiveTodos(id)
+      .subscribe(() => {}, err => alert('Failed to Archive'));
+    // .subscribe((data: number) => {
+    //   // console.log(data);
+    //   this.onGetArchiveData(data);
+    // });
   }
 
   onGetArchiveData(id: number) {
@@ -181,18 +192,20 @@ export class TodoListComponent implements OnInit, OnChanges {
       // this.check = false;
       this.todoService
         .completeTodos(isCompleted, id)
-        .subscribe((data: ArrayType) => {
-          // console.log(data);
-          this.onGetCompleteData(data);
-        });
+        .subscribe(() => {}, err => alert('Failed to check'));
+      // .subscribe((data: ArrayType) => {
+      //   // console.log(data);
+      //   this.onGetCompleteData(data);
+      // });
     } else {
       // this.check = true;
       this.todoService
         .completeTodos(isCompleted, id)
-        .subscribe((data: ArrayType) => {
-          // console.log(data);
-          this.onGetCompleteData(data);
-        });
+        .subscribe(() => {}, err => alert('Failed to check'));
+      // .subscribe((data: ArrayType) => {
+      //   // console.log(data);
+      //   this.onGetCompleteData(data);
+      // });
     }
   }
 

@@ -27,31 +27,45 @@ export class TobedoneService {
   postTodos(txt) {
     return this.http.post(this.postTodosUrl, txt).pipe(
       tap(() => {
-        debugger;
         this.refreshTodos();
       })
     );
   }
   private refreshTodos() {
-    debugger;
     this.getTodos().subscribe((data: any[]) => this.todosUpdated$.next(data));
   }
 
   deleteTodos(txt: number) {
     // console.log(txt);
     this.deleteTodosUrl = `api/todos/delete/${txt}`;
-    return this.http.delete(this.deleteTodosUrl);
+    return this.http.delete(this.deleteTodosUrl).pipe(
+      tap(() => {
+        this.refreshTodos();
+      })
+    );
   }
   archiveTodos(txt: number) {
     this.archiveTodosUrl = `api/todos/archive/${txt}`;
-    return this.http.put(this.archiveTodosUrl, null);
+    return this.http.put(this.archiveTodosUrl, null).pipe(
+      tap(() => {
+        this.refreshTodos();
+      })
+    );
   }
   completeTodos(txt: boolean, id: number) {
     this.completeTodosUrl = `api/todos/complete/${txt}/${id}`;
-    return this.http.put(this.completeTodosUrl, null);
+    return this.http.put(this.completeTodosUrl, null).pipe(
+      tap(() => {
+        this.refreshTodos();
+      })
+    );
   }
   afterUpdateClick(editInput: object, id: number) {
     this.editTodosUrl = `api/todos/edit/${id}`;
-    return this.http.put(this.editTodosUrl, editInput);
+    return this.http.put(this.editTodosUrl, editInput).pipe(
+      tap(() => {
+        this.refreshTodos();
+      })
+    );
   }
 }
