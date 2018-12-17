@@ -1,0 +1,7 @@
+<select ngModel (ngModelChange)="mySelectHandler($event)">
+  <option *ngFor="let value of variousVoltages" [ngValue]="value.text">{{
+    value.text
+  }}</option>
+</select>
+
+<div><app-nvd3 [options]="options" [data]="data"></app-nvd3></div>
