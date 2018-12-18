@@ -319,14 +319,24 @@ export class FrequencyLineChartComponent implements OnInit {
         return 0;
       });
     };
-    console.log(this.originalData.length);
-    for (let i = 0; i < this.originalData.length; i++) {
-      console.log(sortArray(this.originalData[i].values, 'timeStamp'));
-      this.data[i] = {
-        key: this.originalData[i].key,
-        values: sortArray(this.originalData[i].values, 'timeStamp')
+    // 1st method
+    // console.log(this.originalData.length);
+    // for (let i = 0; i < this.originalData.length; i++) {
+    //   console.log(sortArray(this.originalData[i].values, 'timeStamp'));
+    //   this.data[i] = {
+    //     key: this.originalData[i].key,
+    //     values: sortArray(this.originalData[i].values, 'timeStamp')
+    //   };
+    // }
+
+    // 2nd method using map
+    this.data = this.originalData.map(obj => {
+      const dataObj = {
+        key: obj.key,
+        values: sortArray(obj.values, 'timeStamp')
       };
-    }
-    debugger;
+      // console.log(dataObj);
+      return dataObj;
+    });
   }
 }
